@@ -6,6 +6,7 @@ pipeline {
 	registryCredential = 'Bri!!iouser2021'
 	dockerImage = ''
   }
+  stages{
   stage('Building our image') {
 	steps{
 	  script {
@@ -14,5 +15,6 @@ pipeline {
 		sh 'docker push vishwavk2021/docker:$BUILD_NUMBER'
 	  }
 	}
+  }
   }
 }
