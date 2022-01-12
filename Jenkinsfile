@@ -22,6 +22,11 @@ pipeline {
         bat "mvn package"
       }
     }
+     stage("Sonar stage") {
+      steps {
+        bat "mvn package sonar:sonar"
+      }
+    }
  
 	stage('Docker_image_build') {
 		steps {
