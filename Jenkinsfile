@@ -27,13 +27,5 @@ pipeline {
         bat "mvn package sonar:sonar"
       }
     }
- 
-	stage('Docker_image_build') {
-		steps {
-		  bat 'docker build -t vishwavk2021/docker:tagnumber .'
-
-		}
-	}
-	
 	}
 }
