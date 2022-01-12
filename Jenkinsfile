@@ -1,32 +1,18 @@
 pipeline {
   agent any
-  stages {
-     stage("Cleaning Stage") {
-      steps {
-        bat "mvn clean"
-      }
-    }
-    stage("Testing stage") {
-      steps {
-        bat "mvn test"
-      }
-    }
-    stage("Packaging stage") {
-      steps {
-        bat "mvn package"
-      }
-    }
-    stage("sonarqube stage"){
-       steps {
-         bat "mvn package sonar:sonar"
-       }
-    }
-//     stage("Consolidate Results") {
-//       steps {
-//         input("Do you want to capture results?")
-//         junit'**/target/surefire-reports/TEST-*.xml'
-//         archive 'target/*.jar'
-//       }
-//     }
+  
+  environment {
+	registry = "vishwavk2021/docker"
+	registryCredential = 'Bri!!iouser2021'
+	dockerImage = ''
+  }
+  stage('Building our image') {
+	steps{
+	  script {
+		sh 'docker login -u vishwavk2021 -p Bri!!iouser2021'
+		sh 'docker build -t vishwavk2021/docker:$BUILD_NUMBER .'
+		sh 'docker push vishwavk2021/docker:$BUILD_NUMBER'
+	  }
+	}
   }
 }
