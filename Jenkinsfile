@@ -6,18 +6,35 @@ pipeline {
 	}
 	
 	stages{
-		stage('Docker_image_build') {
-			steps {
-				sh "docker build -t vishwavk2021/docker:$tagnumber ."
-			}
+	
+     stage("Cleaning Stage") {
+      steps {
+        bat "mvn clean"
+      }
+    }
+    stage("Testing stage") {
+      steps {
+        bat "mvn test"
+      }
+    }
+    stage("Packaging stage") {
+      steps {
+        bat "mvn package"
+      }
+    }
+ 
+	stage('Docker_image_build') {
+		steps {
+			sh "docker build -t vishwavk2021/docker:$tagnumber ."
 		}
-		stage('Docke_image_push') {
-			steps {
+	}
+	stage('Docke_image_push') {
+		steps {
 
-				sh " docker login -u vishwavk2021 -p Bri!!iouser2021"
+			sh " docker login -u vishwavk2021 -p Bri!!iouser2021"
 
-				sh "docker push vishwavk2021/docker:$tagnumber"
-			}
+			sh "docker push vishwavk2021/docker:$tagnumber"
 		}
+	}
 	}
 }
