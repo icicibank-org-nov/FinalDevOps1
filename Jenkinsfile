@@ -30,8 +30,8 @@ pipeline {
  
 	stage('Docker_image_build') {
 		steps {
-		  bat 'docker build -t blog/sbdemo:latest .'
-		  bat '$ docker run -d --name demo-default -p 8090:8090 -p 8091:8091 blog/sbdemo:latest'
+		  bat 'docker build -t vishwavk2021/docker:tagnumber .'
+
 		}
 	}
 	
